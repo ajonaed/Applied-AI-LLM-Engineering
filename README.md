@@ -1,4 +1,4 @@
-# Applied-AI-LLM-Engeering
+# Applied-AI-LLM-Engineering
 
 
 Each folder contains:
