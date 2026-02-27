@@ -1,2 +1,7 @@
-# Applied-AI---LLM-Engeering
-AI observability utilities built with Python decorators for latency tracking, structured logging, and API instrumentation. Simulates LLM/API calls to measure execution time and performance metrics.
+# Applied-AI-LLM-Engeering
+
+AI Observability Utils — Latency Instrumentation Decorators
+
+This project implements production-style Python instrumentation decorators used to monitor API and LLM execution performance.
+
+The system measures function execution time, logs structured telemetry, and tracks latency statistics — simulating how real AI backends observe and debug model calls.
