@@ -1,7 +1,88 @@
 # Applied-AI-LLM-Engeering
 
-AI Observability Utils — Latency Instrumentation Decorators
 
-This project implements production-style Python instrumentation decorators used to monitor API and LLM execution performance.
+Each folder contains:
+- working code
+- documentation
+- runnable examples
+- incremental production improvements
 
-The system measures function execution time, logs structured telemetry, and tracks latency statistics — simulating how real AI backends observe and debug model calls.
+---
+
+## 🧠 Engineering Principles
+
+This repository follows real-world backend engineering practices:
+
+- Clean architecture over notebooks
+- Observability first
+- Reusable utilities
+- Incremental production readiness
+- Measurable performance (latency, logging, metrics)
+
+---
+
+## 🚀 Learning Roadmap
+
+### Phase 1 — Python & Backend Foundations
+- Decorators & instrumentation
+- Retry logic & error handling
+- Async programming
+- FastAPI services
+
+### Phase 2 — Applied ML & NLP
+- Embeddings & semantic search
+- Vector databases
+- Retrieval pipelines
+
+### Phase 3 — Applied AI Systems
+- RAG architectures
+- Tool-calling agents
+- Memory systems
+- Multi-agent workflows
+
+### Phase 4 — Production Engineering
+- Deployment
+- Monitoring
+- System design
+- Performance optimization
+
+---
+
+## 📦 Tech Stack
+
+- Python
+- FastAPI
+- Pydantic
+- AsyncIO
+- LangChain / LangGraph (later phases)
+- Vector Databases (FAISS / Chroma)
+- Structured Logging & Observability
+
+---
+
+## 🔬 Current Progress
+
+| Week | Project | Status |
+|------|--------|--------|
+| 1 | Observability Decorators | 🚧 In Progress |
+| 2 | Retry & Backoff | ⏳ Planned |
+| 3 | Async Aggregator | ⏳ Planned |
+| 4 | FastAPI AI Service | ⏳ Planned |
+
+---
+
+## 🧪 How to Run (Example)
+
+Each module includes its own instructions.
+
+Example:
+
+''' bash
+cd 01-observability-decorators
+python main.py '''
+
+
+👨‍💻 Author
+
+Abdullah Jonaed
+Software Engineer → Applied AI Engineer
