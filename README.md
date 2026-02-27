@@ -1,7 +1,7 @@
 # Applied-AI-LLM-Engineering
 
-
 Each folder contains:
+
 - working code
 - documentation
 - runnable examples
@@ -24,23 +24,27 @@ This repository follows real-world backend engineering practices:
 ## 🚀 Learning Roadmap
 
 ### Phase 1 — Python & Backend Foundations
+
 - Decorators & instrumentation
 - Retry logic & error handling
 - Async programming
 - FastAPI services
 
 ### Phase 2 — Applied ML & NLP
+
 - Embeddings & semantic search
 - Vector databases
 - Retrieval pipelines
 
 ### Phase 3 — Applied AI Systems
+
 - RAG architectures
 - Tool-calling agents
 - Memory systems
 - Multi-agent workflows
 
 ### Phase 4 — Production Engineering
+
 - Deployment
 - Monitoring
 - System design
@@ -62,12 +66,12 @@ This repository follows real-world backend engineering practices:
 
 ## 🔬 Current Progress
 
-| Week | Project | Status |
-|------|--------|--------|
-| 1 | Observability Decorators | 🚧 In Progress |
-| 2 | Retry & Backoff | ⏳ Planned |
-| 3 | Async Aggregator | ⏳ Planned |
-| 4 | FastAPI AI Service | ⏳ Planned |
+| Week | Project                  | Status         |
+| ---- | ------------------------ | -------------- |
+| 1    | Observability Decorators | 🚧 In Progress |
+| 2    | Retry & Backoff          | ⏳ Planned     |
+| 3    | Async Aggregator         | ⏳ Planned     |
+| 4    | FastAPI AI Service       | ⏳ Planned     |
 
 ---
 
@@ -81,8 +85,8 @@ Example:
 cd 01-observability-decorators
 python main.py '''
 
-
 👨‍💻 Author
 
 Abdullah Jonaed
+
 Software Engineer → Applied AI Engineer
