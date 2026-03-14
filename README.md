@@ -68,7 +68,7 @@ This repository follows real-world backend engineering practices:
 
 | Week | Project                  | Status         |
 | ---- | ------------------------ | -------------- |
-| 1    | Observability Decorators | 🚧 In Progress |
+| 1    | Observability Decorators |  ✓ completed   |
 | 2    | Retry & Backoff          | ⏳ Planned     |
 | 3    | Async Aggregator         | ⏳ Planned     |
 | 4    | FastAPI AI Service       | ⏳ Planned     |
@@ -78,30 +78,36 @@ This repository follows real-world backend engineering practices:
 
 
 01-observability-decorators/
+│   .gitignore
+│   main.py
+│   README.md
+│   requirements.txt
 │
-├── main.py
-├── README.md
-├── requirements.txt
-├── .gitignore
+├───logs
+│       log.log
 │
-├── logs/
-│ └── log.log
+├───output
+│       output.txt
 │
-├── output/
-│ └── output.txt
+├───prompts
+│       prompts.txt
 │
-├── prompts/
-│ └── prompts.txt
+├───src
+│   └───observability
+│       │   decorators.py
+│       │   metrics.py
+│       │   mock_api.py
+│       │   writer.py
+│       │   __init__.py
+│       │
+│       └───__pycache__
+│               decorators.cpython-313.pyc
+│               metrics.cpython-313.pyc
+│               mock_api.cpython-313.pyc
+│               writer.cpython-313.pyc
+│               __init__.cpython-313.pyc
 │
-├── src/
-│ └── observability/
-│ ├── decorators.py
-│ ├── metrics.py
-│ ├── mock_api.py
-│ ├── writer.py
-│ └── init.py
-│
-└── test/
+└───test
 
 ---
 
