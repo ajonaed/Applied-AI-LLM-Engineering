@@ -43,18 +43,31 @@ The project simulates AI/LLM API calls and collects performance metrics similar 
 
 ---
 
+
 # 🏗 System Architecture
 
-```mermaid
-flowchart TD
-A[Prompts File] --> B[main.py]
-B --> C[mock_api.py]
-C --> D[clock decorator]
-D --> E[LatencyTracker (metrics.py)]
-E --> F[writer.py]
-F --> G[Logs + Output Files]
 ```
-
+Prompts File
+      │
+      ▼
+   main.py
+      │
+      ▼
+  mock_api.py
+      │
+      ▼
+ clock decorator
+      │
+      ▼
+ LatencyTracker
+   (metrics.py)
+      │
+      ▼
+    writer.py
+      │
+      ▼
+Logs + Output Files
+```
 ---
 
 # 📁 Project Structure
