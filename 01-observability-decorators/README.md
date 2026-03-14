@@ -34,7 +34,7 @@ The project simulates AI/LLM API calls and collects performance metrics similar 
 • Basic observability design patterns used in real services
 
 🏗 System Architecture
-```
+
 Prompts File
      │
      ▼
@@ -54,7 +54,7 @@ writer.py
      │
      ▼
 Logs + Output Files
-```
+
 📁 Project Structure
 ```
 01-observability-decorators/
