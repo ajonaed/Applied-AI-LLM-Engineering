@@ -1,43 +1,67 @@
-# Execution-Time Logging Decorator & API Latency Tracker
+Applied AI LLM Engineering
+Python Observability Toolkit: Execution-Time Decorators & API Latency Tracking
 
-This project demonstrates a simple **observability utility for Python services** using decorators.
-It instruments function execution, measures latency, and records performance metrics for simulated API calls.
+This project demonstrates a production-style observability utility for Python services using decorators.
 
-The system simulates external AI/LLM requests, records execution time, and produces summary statistics such as average latency and p95 latency.
+It instruments function execution, measures latency, and records performance metrics for simulated API / LLM calls.
 
----
+The system simulates external AI requests, records execution time, and produces summary statistics such as average latency, p95 latency, min/max latency, and total call count.
 
-## 🎯 Project Purpose
+🎯 Project Purpose
 
-Modern backend and AI systems require **observability** to monitor performance and diagnose issues.
+Modern backend and AI systems require observability to monitor performance, detect bottlenecks, and diagnose failures.
 
-This project demonstrates:
+This project demonstrates how to implement lightweight observability tooling in Python using clean architecture and modular design.
 
-* Function instrumentation using decorators
-* Latency tracking and metrics aggregation
-* Structured logging of API responses
-* Separation of concerns across modules
+The project simulates AI/LLM API calls and collects performance metrics similar to what real production systems use.
 
----
+✨ Features
 
-## 🧠 Key Concepts Demonstrated
+• Function latency tracking via decorators
+• Thread-safe latency aggregation
+• Modular observability architecture
+• File-based response logging
+• Simulated LLM API calls for testing
+• Execution summary with p95 latency metrics
 
-* Python decorators (`functools.wraps`)
-* Execution time measurement (`time.perf_counter`)
-* Thread-safe metrics collection
-* Modular project architecture
-* File-based logging
-* Basic observability design patterns
+🧠 Key Concepts Demonstrated
 
----
+• Python decorators (functools.wraps)
+• Execution time measurement (time.perf_counter)
+• Thread-safe metrics collection (threading.Lock)
+• Modular backend architecture
+• File-based logging and output persistence
+• Basic observability design patterns used in real services
 
-## 📁 Project Structure
-
+🏗 System Architecture
+```
+Prompts File
+     │
+     ▼
+main.py
+     │
+     ▼
+mock_api.py  (Simulates external AI / LLM call)
+     │
+     ▼
+clock decorator
+     │
+     ▼
+LatencyTracker (metrics.py)
+     │
+     ▼
+writer.py
+     │
+     ▼
+Logs + Output Files
+```
+📁 Project Structure
 ```
 01-observability-decorators/
 │
 ├── main.py
 ├── README.md
+├── requirements.txt
 │
 ├── logs/
 │   └── log.log
@@ -58,39 +82,33 @@ This project demonstrates:
 │
 └── tests/
 ```
+⚙️ How It Works
 
----
+1️⃣ mock_api.py simulates an external AI/LLM API call with random latency.
 
-## ⚙️ How It Works
+2️⃣ The clock decorator measures execution time of each function call.
 
-1. `mock_api.py` simulates an external AI/LLM API call with random latency.
-2. The `clock` decorator measures execution time of the function.
-3. Latency is recorded by `LatencyTracker` in `metrics.py`.
-4. `writer.py` records responses and latency summaries to files.
-5. `main.py` orchestrates execution using prompts from a file.
+3️⃣ Latency values are recorded by the LatencyTracker class in metrics.py.
 
----
+4️⃣ writer.py writes responses and metrics summaries to files.
 
-## ▶️ Running the Project
+5️⃣ main.py orchestrates execution using prompts loaded from prompts/prompts.txt.
 
-From the project directory:
+▶️ Running the Project
 
-```bash
+Clone the repository and run the project:
+
+pip install -r requirements.txt
 python main.py
-```
 
 The program will:
 
-* Read prompts from `prompts/prompts.txt`
-* Simulate API calls
-* Record responses in `output/output.txt`
-* Log latency metrics in `logs/log.log`
+• Read prompts from prompts/prompts.txt
+• Simulate API calls
+• Record responses in output/output.txt
+• Log latency metrics in logs/log.log
 
----
-
-## 📊 Example Console Output
-
-```
+📊 Example Console Output
 ********** New Execution started **********
 
 Calling mock_llm_call() with prompt: Explain decorators
@@ -100,13 +118,7 @@ Calling mock_llm_call() with prompt: What is RAG?
 [0.9832s] mock_llm_call('What is RAG?')
 
 ********** Execution Completed **********
-```
-
----
-
-## 📈 Example Latency Summary
-
-```
+📈 Example Latency Summary
 Latency Summary
 -------------------------------
 total_calls: 5
@@ -114,41 +126,63 @@ avg_latency: 1.204 seconds
 p95_latency: 1.982 seconds
 max_latency: 2.110 seconds
 min_latency: 0.823 seconds
-```
+🔧 Technologies Used
 
----
+Python 3
+functools
+statistics
+threading
+pathlib
+lorem_text (mock response generation)
 
-## 🔧 Technologies Used
-
-* Python 3
-* `functools`
-* `statistics`
-* `threading`
-* `pathlib`
-* `lorem_text` (for mock response generation)
-
----
-
-## 🚀 Future Improvements
+🚀 Future Improvements
 
 Possible extensions of this project:
 
-* JSON structured logging
-* Async instrumentation (`asyncio`)
-* Retry decorator with exponential backoff
-* API integration with FastAPI
-* Prometheus metrics exporter
-* Distributed tracing support
+• JSON structured logging
+• Async instrumentation using asyncio
+• Retry decorator with exponential backoff
+• FastAPI integration for AI services
+• Prometheus metrics exporter
+• Distributed tracing support
 
----
+📚 Learning Roadmap
 
-## 👤 Author
+This project is part of a larger Applied AI Engineering learning path.
+
+Phase 1 — Python & Backend Foundations
+
+• Observability decorators
+• Retry logic & error handling
+• Async API aggregation
+• FastAPI services
+
+Phase 2 — Applied ML & NLP
+
+• Embeddings & semantic search
+• Vector databases
+• Retrieval pipelines
+
+Phase 3 — AI Systems Engineering
+
+• RAG architectures
+• Tool-calling agents
+• Memory systems
+• Multi-agent workflows
+
+Phase 4 — Production AI Systems
+
+• Deployment
+• Monitoring
+• Performance optimization
+• System design
+
+👨‍💻 Author
 
 Abdullah Jonaed
+
 Software Engineer transitioning into Applied AI / LLM Engineering
 
----
-
-## 📄 License
+📄 License
 
 This project is licensed under the MIT License.
