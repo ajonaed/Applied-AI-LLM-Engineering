@@ -1,0 +1,107 @@
+
+
+********** New Execution **********
+
+****************************************
+Calling mock_llm_call() with prompt: "What is RAG?"
+****************************************
+Response: laborum commodi dolorem cumque odit quaera
+****************************************
+
+
+****************************************
+Calling mock_llm_call() with prompt: "Explain decorators"
+****************************************
+Response: aut adipisci odio eveniet totam sunt expedita et error minim
+****************************************
+
+
+****************************************
+Calling mock_llm_call() with prompt: "What is an AI agent?"
+****************************************
+Response: facere optio architecto ex sint id ad eaque dolore suscipit debiti
+****************************************
+
+
+****************************************
+Calling mock_llm_call() with prompt: "Summarize FastAPI"
+****************************************
+Response: ea aperiam eaque minus quae tempora perspiciatis nostrum 
+****************************************
+
+
+****************************************
+Calling mock_llm_call() with prompt: "What is observability?"
+****************************************
+Response: mollitia consequatur cupiditate obcaecati consectetur quae odio blanditi
+****************************************
+
+
+
+
+********** New Execution **********
+
+****************************************
+Calling mock_llm_call() with prompt: "What is RAG?"
+****************************************
+Response: quas earum suscipit debitis nobis blanditi
+****************************************
+
+****************************************
+Calling mock_llm_call() with prompt: "Explain decorators"
+****************************************
+Response: non voluptas eum ut ipsa amet reprehenderit voluptate asperi
+****************************************
+
+****************************************
+Calling mock_llm_call() with prompt: "What is an AI agent?"
+****************************************
+Response: sit perspiciatis earum beatae dolore quas libero molestiae nam aut
+****************************************
+
+****************************************
+Calling mock_llm_call() with prompt: "Summarize FastAPI"
+****************************************
+Response: doloribus placeat esse accusantium cumque nobis illum dis
+****************************************
+
+****************************************
+Calling mock_llm_call() with prompt: "What is observability?"
+****************************************
+Response: nostrum enim sed laudantium voluptatibus unde debitis eligendi aspernatu
+****************************************
+
+
+
+********** New Execution **********
+
+****************************************
+Calling mock_llm_call() with prompt: "What is RAG?"
+****************************************
+Response: consectetur maiores id autem nulla minus p
+****************************************
+
+****************************************
+Calling mock_llm_call() with prompt: "Explain decorators"
+****************************************
+Response: aliquid dignissimos tenetur ipsam in eaque eveniet distincti
+****************************************
+
+****************************************
+Calling mock_llm_call() with prompt: "What is an AI agent?"
+****************************************
+Response: nisi totam incidunt ipsum quod eveniet nihil magni voluptates dign
+****************************************
+
+****************************************
+Calling mock_llm_call() with prompt: "Summarize FastAPI"
+****************************************
+Response: facilis optio quos dolor quis inventore magnam ab qui qua
+****************************************
+
+****************************************
+Calling mock_llm_call() with prompt: "What is observability?"
+****************************************
+Response: eos quibusdam amet est odit voluptatum aspernatur molestiae eum voluptat
+****************************************
+
