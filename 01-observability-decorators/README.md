@@ -48,26 +48,26 @@ The project simulates AI/LLM API calls and collects performance metrics similar 
 
 ```
 Prompts File
-      │
-      ▼
-   main.py
-      │
-      ▼
-  mock_api.py
-      │
-      ▼
- clock decorator
-      │
-      ▼
- LatencyTracker
-   (metrics.py)
-      │
-      ▼
-    writer.py
-      │
-      ▼
+     │
+     ▼
+main.py
+     │
+     ▼
+mock_api.py  (Simulates external AI / LLM call)
+     │
+     ▼
+clock decorator
+     │
+     ▼
+LatencyTracker (metrics.py)
+     │
+     ▼
+writer.py
+     │
+     ▼
 Logs + Output Files
 ```
+
 ---
 
 # 📁 Project Structure
