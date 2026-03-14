@@ -76,38 +76,33 @@ This repository follows real-world backend engineering practices:
 
 ## Project Repository Structure
 
-
+```
 01-observability-decorators/
-│   .gitignore
-│   main.py
-│   README.md
-│   requirements.txt
 │
-├───logs
-│       log.log
+├── main.py
+├── README.md
+├── requirements.txt
+├── .gitignore
 │
-├───output
-│       output.txt
+├── logs/
+│   └── log.log
 │
-├───prompts
-│       prompts.txt
+├── output/
+│   └── output.txt
 │
-├───src
-│   └───observability
-│       │   decorators.py
-│       │   metrics.py
-│       │   mock_api.py
-│       │   writer.py
-│       │   __init__.py
-│       │
-│       └───__pycache__
-│               decorators.cpython-313.pyc
-│               metrics.cpython-313.pyc
-│               mock_api.cpython-313.pyc
-│               writer.cpython-313.pyc
-│               __init__.cpython-313.pyc
+├── prompts/
+│   └── prompts.txt
 │
-└───test
+├── src/
+│   └── observability/
+│       ├── decorators.py
+│       ├── metrics.py
+│       ├── mock_api.py
+│       ├── writer.py
+│       └── __init__.py
+│
+└── test/
+```
 
 ---
 
