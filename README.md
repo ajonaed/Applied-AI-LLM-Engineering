@@ -73,6 +73,36 @@ This repository follows real-world backend engineering practices:
 | 3    | Async Aggregator         | ⏳ Planned     |
 | 4    | FastAPI AI Service       | ⏳ Planned     |
 
+
+## Project Repository Structure
+
+
+01-observability-decorators/
+│
+├── main.py
+├── README.md
+├── requirements.txt
+├── .gitignore
+│
+├── logs/
+│ └── log.log
+│
+├── output/
+│ └── output.txt
+│
+├── prompts/
+│ └── prompts.txt
+│
+├── src/
+│ └── observability/
+│ ├── decorators.py
+│ ├── metrics.py
+│ ├── mock_api.py
+│ ├── writer.py
+│ └── init.py
+│
+└── test/
+
 ---
 
 ## 🧪 How to Run (Example)
