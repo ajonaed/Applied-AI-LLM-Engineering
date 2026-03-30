@@ -1,107 +1,62 @@
 
 
-********** New Execution **********
+********** New Execution : 2026-03-29 13:47:42.254217 **********
 
 ****************************************
 Calling mock_llm_call() with prompt: "What is RAG?"
 ****************************************
-Response: laborum commodi dolorem cumque odit quaera
-****************************************
-
-
-****************************************
-Calling mock_llm_call() with prompt: "Explain decorators"
-****************************************
-Response: aut adipisci odio eveniet totam sunt expedita et error minim
-****************************************
-
-
-****************************************
-Calling mock_llm_call() with prompt: "What is an AI agent?"
-****************************************
-Response: facere optio architecto ex sint id ad eaque dolore suscipit debiti
-****************************************
-
-
-****************************************
-Calling mock_llm_call() with prompt: "Summarize FastAPI"
-****************************************
-Response: ea aperiam eaque minus quae tempora perspiciatis nostrum 
-****************************************
-
-
-****************************************
-Calling mock_llm_call() with prompt: "What is observability?"
-****************************************
-Response: mollitia consequatur cupiditate obcaecati consectetur quae odio blanditi
-****************************************
-
-
-
-
-********** New Execution **********
-
-****************************************
-Calling mock_llm_call() with prompt: "What is RAG?"
-****************************************
-Response: quas earum suscipit debitis nobis blanditi
+Response: FAILED
 ****************************************
 
 ****************************************
 Calling mock_llm_call() with prompt: "Explain decorators"
 ****************************************
-Response: non voluptas eum ut ipsa amet reprehenderit voluptate asperi
+Response: FAILED
 ****************************************
 
 ****************************************
 Calling mock_llm_call() with prompt: "What is an AI agent?"
 ****************************************
-Response: sit perspiciatis earum beatae dolore quas libero molestiae nam aut
+Response: FAILED
 ****************************************
 
 ****************************************
 Calling mock_llm_call() with prompt: "Summarize FastAPI"
 ****************************************
-Response: doloribus placeat esse accusantium cumque nobis illum dis
+Response: FAILED
 ****************************************
 
 ****************************************
 Calling mock_llm_call() with prompt: "What is observability?"
 ****************************************
-Response: nostrum enim sed laudantium voluptatibus unde debitis eligendi aspernatu
+Response: FAILED
 ****************************************
 
 
 
-********** New Execution **********
+********** New Execution : 2026-03-29 17:18:24.787161 **********
 
-****************************************
-Calling mock_llm_call() with prompt: "What is RAG?"
-****************************************
-Response: consectetur maiores id autem nulla minus p
-****************************************
 
-****************************************
-Calling mock_llm_call() with prompt: "Explain decorators"
-****************************************
-Response: aliquid dignissimos tenetur ipsam in eaque eveniet distincti
-****************************************
 
-****************************************
-Calling mock_llm_call() with prompt: "What is an AI agent?"
-****************************************
-Response: nisi totam incidunt ipsum quod eveniet nihil magni voluptates dign
-****************************************
+********** New Execution : 2026-03-29 17:19:39.055277 **********
 
-****************************************
-Calling mock_llm_call() with prompt: "Summarize FastAPI"
-****************************************
-Response: facilis optio quos dolor quis inventore magnam ab qui qua
-****************************************
 
-****************************************
-Calling mock_llm_call() with prompt: "What is observability?"
-****************************************
-Response: eos quibusdam amet est odit voluptatum aspernatur molestiae eum voluptat
-****************************************
+
+********** New Execution : 2026-03-29 17:21:04.057244 **********
+
+
+
+********** New Execution : 2026-03-29 17:23:36.888653 **********
+
+
+
+********** New Execution : 2026-03-29 17:25:30.630545 **********
+
+
+
+********** New Execution : 2026-03-29 17:32:48.027588 **********
+
+
+
+********** New Execution : 2026-03-29 17:42:48.937415 **********
 

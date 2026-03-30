@@ -59,3 +59,6 @@ class LatencyTracker:
             "max_latency": round(max(latencies), 3),
             "min_latency": round(min(latencies), 3),
         }
+
+# CRITICAL: Create the single instance here
+shared_tracker = LatencyTracker()
