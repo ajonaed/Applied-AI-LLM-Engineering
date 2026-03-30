@@ -314,3 +314,215 @@ Calling mock_llm_call() with prompt: "What is RAG?"
 Response: Success
 ****************************************
 
+
+
+********** New Execution : 2026-03-30 07:19:42.206313 **********
+
+****************************************
+Calling mock_llm_call() with prompt: "What is RAG?"
+****************************************
+Response: This failure log is exactly what you need to see.
+****************************************
+
+
+
+********** New Execution : 2026-03-30 07:22:03.792514 **********
+
+****************************************
+Calling mock_llm_call() with prompt: "What is RAG?"
+****************************************
+Response: This failure log is exactly what you need to see.
+****************************************
+
+****************************************
+Calling mock_llm_call() with prompt: "Explain decorators"
+****************************************
+Response: This failure log is exactly what you need to see.
+****************************************
+
+****************************************
+Calling mock_llm_call() with prompt: "What is an AI agent?"
+****************************************
+Response: This failure log is exactly what you need to see.
+****************************************
+
+****************************************
+Calling mock_llm_call() with prompt: "Summarize FastAPI"
+****************************************
+Response: This failure log is exactly what you need to see.
+****************************************
+
+
+
+********** New Execution : 2026-03-30 07:22:30.502156 **********
+
+****************************************
+Calling mock_llm_call() with prompt: "What is RAG?"
+****************************************
+Response: This failure log is exactly what you need to see.
+****************************************
+
+****************************************
+Calling mock_llm_call() with prompt: "Explain decorators"
+****************************************
+Response: This failure log is exactly what you need to see.
+****************************************
+
+****************************************
+Calling mock_llm_call() with prompt: "What is an AI agent?"
+****************************************
+Response: This failure log is exactly what you need to see.
+****************************************
+
+****************************************
+Calling mock_llm_call() with prompt: "Summarize FastAPI"
+****************************************
+Response: This failure log is exactly what you need to see.
+****************************************
+
+****************************************
+Calling mock_llm_call() with prompt: "What is observability?"
+****************************************
+Response: This failure log is exactly what you need to see.
+****************************************
+
+
+
+********** New Execution : 2026-03-30 07:22:47.174766 **********
+
+****************************************
+Calling mock_llm_call() with prompt: "What is RAG?"
+****************************************
+Response: This failure log is exactly what you need to see.
+****************************************
+
+
+
+********** New Execution : 2026-03-30 07:23:31.913676 **********
+
+****************************************
+Calling mock_llm_call() with prompt: "What is RAG?"
+****************************************
+Response: This failure log is exactly what you need to see.
+****************************************
+
+****************************************
+Calling mock_llm_call() with prompt: "Explain decorators"
+****************************************
+Response: This failure log is exactly what you need to see.
+****************************************
+
+****************************************
+Calling mock_llm_call() with prompt: "What is an AI agent?"
+****************************************
+Response: This failure log is exactly what you need to see.
+****************************************
+
+****************************************
+Calling mock_llm_call() with prompt: "Summarize FastAPI"
+****************************************
+Response: This failure log is exactly what you need to see.
+****************************************
+
+
+
+********** New Execution : 2026-03-30 07:26:22.116331 **********
+
+****************************************
+Calling mock_llm_call() with prompt: "What is RAG?"
+****************************************
+Response: This failure log is exactly what you need to see.
+****************************************
+
+****************************************
+Calling mock_llm_call() with prompt: "Explain decorators"
+****************************************
+Response: This failure log is exactly what you need to see.
+****************************************
+
+****************************************
+Calling mock_llm_call() with prompt: "What is an AI agent?"
+****************************************
+Response: This failure log is exactly what you need to see.
+****************************************
+
+****************************************
+Calling mock_llm_call() with prompt: "Summarize FastAPI"
+****************************************
+Response: FAILED
+****************************************
+
+****************************************
+Calling mock_llm_call() with prompt: "What is observability?"
+****************************************
+Response: This failure log is exactly what you need to see.
+****************************************
+
+
+
+********** New Execution : 2026-03-30 07:28:44.116397 **********
+
+****************************************
+Calling mock_llm_call() with prompt: "What is RAG?"
+****************************************
+Response: This failure log is exactly what you need to see.
+****************************************
+
+****************************************
+Calling mock_llm_call() with prompt: "Explain decorators"
+****************************************
+Response: This failure log is exactly what you need to see.
+****************************************
+
+****************************************
+Calling mock_llm_call() with prompt: "What is an AI agent?"
+****************************************
+Response: This failure log is exactly what you need to see.
+****************************************
+
+****************************************
+Calling mock_llm_call() with prompt: "Summarize FastAPI"
+****************************************
+Response: This failure log is exactly what you need to see.
+****************************************
+
+****************************************
+Calling mock_llm_call() with prompt: "What is observability?"
+****************************************
+Response: FAILED
+****************************************
+
+
+
+********** New Execution : 2026-03-30 07:31:11.529322 **********
+
+****************************************
+Calling mock_llm_call() with prompt: "What is RAG?"
+****************************************
+Response: This failure log is exactly what you need to see.
+****************************************
+
+****************************************
+Calling mock_llm_call() with prompt: "Explain decorators"
+****************************************
+Response: This failure log is exactly what you need to see.
+****************************************
+
+****************************************
+Calling mock_llm_call() with prompt: "What is an AI agent?"
+****************************************
+Response: FAILED
+****************************************
+
+****************************************
+Calling mock_llm_call() with prompt: "Summarize FastAPI"
+****************************************
+Response: This failure log is exactly what you need to see.
+****************************************
+
+****************************************
+Calling mock_llm_call() with prompt: "What is observability?"
+****************************************
+Response: This failure log is exactly what you need to see.
+****************************************
+

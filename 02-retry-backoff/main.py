@@ -25,8 +25,8 @@ def main():
     for prompt in prompts:
         try:
             
-            mock_llm_call(prompt)
-            write_api_output(prompt, "Success")
+            result = mock_llm_call(prompt,)
+            write_api_output(prompt, result["response"])
         except Exception as exc:
             # This ONLY runs if ALL retries failed
             log_generic_error({"e": exc, "prompt": prompt})

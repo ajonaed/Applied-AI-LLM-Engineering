@@ -13,16 +13,16 @@ output_file_path.parent.mkdir(parents=True, exist_ok=True)
 
 
 def mark_start_of_execution():
-    #     with open(log_file_path, "a") as file:
-    #         file.write(
-    #             "\n\n"
-    #             + "*" * 10
-    #             + " New Execution : "
-    #             + str(datetime.now())
-    #             + " "
-    #             + "*" * 10
-    #             + "\n\n"
-    #         )
+    with open(log_file_path, "a") as file:
+        file.write(
+            "\n\n"
+            + "*" * 10
+            + " New Execution : "
+            + str(datetime.now())
+            + " "
+            + "*" * 10
+            + "\n\n"
+        )
     with open(output_file_path, "a") as file:
         file.write(
             "\n\n"
@@ -83,15 +83,16 @@ def write_form_decorator_retry(data: dict):
 
 def log_generic_error(data: dict):
     logger = AppLogger.get_logger(str(log_file_path))
-
+    thread_name = data.get("thread", "UnknownThread")
+    prompt_val = data.get("prompt", "N/A")
     logger.error(
-        "error_event",
+        "Terminal Execution Failure",
         extra={
             "extra_data": {
                 "event": "error",
                 "exception": str(data["e"]),
-                "thread": data["thread"],
-                "prompt": data["prompt"],
+                "thread": thread_name,
+                "prompt": prompt_val,
             }
         },
     )
