@@ -1,41 +1,85 @@
 import logging
-from logging import LoggerAdapter
+import json
+import os
+from datetime import datetime
 from logging.handlers import TimedRotatingFileHandler
+from pathlib import Path
+
+
+class JsonFormatter(logging.Formatter):
+    def format(self, record):
+        log_record = {
+            "timestamp": datetime.utcnow().isoformat(),  # The .isoformat() makes it a string!,
+            "level": record.levelname,
+            "message": record.getMessage(),
+            "logger": record.name,
+            # Use environment variables (Month 1 Week 4 prep)
+            "service": os.getenv("SERVICE_NAME", "ai-llm-service"),
+            "env": os.getenv("APP_ENV", "dev"),
+        }
+
+        # IMPROVEMENT: Automatically merge ANY extra fields without 'extra_data' key
+        # This makes your decorators much cleaner.
+        standard_attrs = (
+            "args",
+            "asctime",
+            "created",
+            "exc_info",
+            "exc_text",
+            "filename",
+            "funcName",
+            "levelname",
+            "levelno",
+            "lineno",
+            "module",
+            "msecs",
+            "msg",
+            "name",
+            "pathname",
+            "process",
+            "processName",
+            "relativeCreated",
+            "stack_info",
+            "thread",
+            "threadName",
+        )
+
+        for key, value in record.__dict__.items():
+            if key not in standard_attrs:
+                log_record[key] = value
+
+        return json.dumps(log_record)
 
 
 class AppLogger:
-    __instance: LoggerAdapter = None
+    _logger = None
 
-    @staticmethod
-    def getInstance(filePath):
-        if AppLogger.__instance == None:
-            AppLogger.initLogger(filePath)
-        return AppLogger.__instance
+    @classmethod
+    def get_logger(cls, file_path: str = "logs/app.log"):
+        if cls._logger is None:
+            # 1. Resolve absolute path to avoid "disappearing" files
+            log_path = Path(file_path).resolve()
+            log_path.parent.mkdir(parents=True, exist_ok=True)
 
-    @staticmethod
-    def initLogger(filePath):
-        # get a named global logger
-        appLogger = logging.getLogger("root")
-        appLogger.setLevel(logging.INFO)
+            logger = logging.getLogger("app_llm_engineer")  # Unique name
+            logger.setLevel(logging.INFO)
+            logger.propagate = False  # Prevent double logging to console
 
-        # configure console logging
-        # interval=1 means the log rotation interval is 1
-        # when='d' means the rotating interval will be in terms of days
-        fileHandler = TimedRotatingFileHandler(
-            filePath, backupCount=100, when="d", interval=1
-        )
-        # use namer function of the handler to keep the .log extension at the end of the file name
-        fileHandler.namer = lambda name: name.replace(".log", "") + ".log"
-        fmt = "%(asctime)s | %(levelname)s |  %(name)s | %(message)s"
+            # 2. Clear existing handlers to prevent duplicates during dev
+            if logger.hasHandlers():
+                logger.handlers.clear()
 
-        fileHandler.setFormatter(
-            logging.Formatter(
-                fmt,
-                datefmt="%Y-%m-%d %H:%M:%S",  # 👈 no milliseconds
+            # 3. Setup File Handler
+            file_handler = TimedRotatingFileHandler(
+                str(log_path),
+                when="midnight",
+                interval=1,
+                backupCount=30,
+                encoding="utf-8",
             )
-        )
-        appLogger.addHandler(fileHandler)
+            file_handler.setFormatter(JsonFormatter())
+            logger.addHandler(file_handler)
 
-        AppLogger.__instance = LoggerAdapter(
-            appLogger,
-        )
+            cls._logger = logger
+
+        return cls._logger
