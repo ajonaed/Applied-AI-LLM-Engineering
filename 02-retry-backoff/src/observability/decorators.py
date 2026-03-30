@@ -8,6 +8,7 @@ from typing import Callable, Any
 import functools
 import time
 import logging
+
 # from src.observability.metrics import LatencyTracker  # Your LatencyTracker instance
 from src.observability.logHelper import AppLogger
 from .metrics import shared_tracker as tracker
@@ -30,7 +31,6 @@ def clock(func):
         arg_str = ", ".join(
             [repr(arg) for arg in args] + [f"{k}={v!r}" for k, v in kwargs.items()]
         )
-
         try:
             # Execute the actual function
             result = func(*args, **kwargs)
@@ -64,6 +64,7 @@ def clock(func):
                     "elapsed_time": f"{elapsed:.4f}s",
                     "error_type": type(e).__name__,
                     "error_msg": str(e),
+                    "custom_message": f"From Clock Decorator with prompt {arg_str}",
                 },
             )
             # Re-raise so the @retry decorator can see the error [cite: 59, 60]
@@ -78,12 +79,15 @@ def retry(max_attempts, base_delay=1):
         def wrapper(*args, **kwargs):
             delay = base_delay
             last_exception = None
-
+            # Format arguments for logging (careful with large LLM prompts)
+            arg_str = ", ".join(
+                [repr(arg) for arg in args] + [f"{k}={v!r}" for k, v in kwargs.items()]
+            )
             for i in range(max_attempts):
                 try:
                     return func(*args, **kwargs)
 
-                except Exception as e:
+                except (ConnectionError, TimeoutError) as e:
                     last_exception = e
 
                     # Check if last attempt
@@ -102,6 +106,7 @@ def retry(max_attempts, base_delay=1):
                             "attempt": i + 1,
                             "next_delay": round(sleep_time, 2),
                             "error": str(e),
+                            "custom_message ": f"From Clock Decorator with prompt {arg_str}",
                         },
                     )
 

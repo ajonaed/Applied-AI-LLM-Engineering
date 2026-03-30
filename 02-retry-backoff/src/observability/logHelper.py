@@ -42,6 +42,7 @@ class JsonFormatter(logging.Formatter):
             "stack_info",
             "thread",
             "threadName",
+            "custom",
         )
 
         for key, value in record.__dict__.items():
