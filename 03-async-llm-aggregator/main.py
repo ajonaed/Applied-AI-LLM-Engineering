@@ -1,57 +1,36 @@
-from pathlib import Path
-
 import asyncio
-from src.observability.metrics import shared_tracker as tracker
-from src.observability.writer import (
-    log_generic_error,
-    mark_start_of_execution,
-    write_api_output,
-    write_latency_summary,
-)
-from experiments.concurrent_tasks import provider_a, provider_b, provider_c
+import time
+
+from src.aggregator import AsyncAggregator
+from src.clients.mock_client import MockClient
+from src.clients.ollama_client import OllamaClient
 
 
 async def main():
-    # base_dir = Path(__file__).resolve().parent
 
-    # prompt_file_path = base_dir / "prompts" / "prompts.txt"
+    client_1 = MockClient(name="Client 1", delay=2.0)
+    client_2 = MockClient(name="Client 2", delay=1.5)
 
-    # with open(prompt_file_path, "r") as file:
-    #     prompts = [line.strip() for line in file if line.strip()]
+    ollama_client_1 = OllamaClient()
+    # result_1 = await ollama_client_1.generate("What is Applied AI vs Agentic AI?")
 
-    # print("*" * 10 + " New Execution started " + "*" * 10 + "\n")
+    ollama_client_2 = OllamaClient()
+    # result_2 = await ollama_client_2.generate(
+    #     "Which has better job prospects, Applied AI or Agentic AI?"
+    # )
 
-    # mark_start_of_execution()
-
-    # for prompt in prompts:
-    #     try:
-    #         result = mock_llm_call(
-    #             prompt,
-    #         )
-    #         write_api_output(prompt, result["response"])
-    #     except Exception as exc:
-    #         # This ONLY runs if ALL retries failed
-    #         log_generic_error({"e": exc, "prompt": prompt})
-    #         write_api_output(prompt, "FAILED")
-
-    # latency_info = tracker.summary()
-    # write_latency_summary(latency_info)
-
-    # print("\n" + "*" * 10 + " Execution Completed " + "*" * 10 + "\n")
-
-    a, b, c = await asyncio.gather(provider_a(), provider_b(), provider_c())
-    print(a, b, c)
-    task_a = asyncio.create_task(provider_a())
-    task_b = asyncio.create_task(provider_b())
-    task_c = asyncio.create_task(provider_c())
-    results_a = await task_a
-    results_b = await task_b
-    results_c = await task_c
-    print(results_a, results_b, results_c)
-    # results = await asyncio.gather(task_a, task_b, task_c)
-    # print(results)
-    
-
+    start = time.perf_counter()
+    print("Starting aggregation...")
+    aggregator = AsyncAggregator(
+        clients=[client_1, client_2, ollama_client_1, ollama_client_2]
+    )
+    aggregator_results = await aggregator.aggregate(
+        "I am a software engineer, should I continue Applied AI or Agentic AI?"
+    )
+    print("Results:", aggregator_results)
+    print("Aggregation completed.")
+    end = time.perf_counter()
+    print(f"Total time taken: {end - start:.2f} seconds")
 
 
 if __name__ == "__main__":
