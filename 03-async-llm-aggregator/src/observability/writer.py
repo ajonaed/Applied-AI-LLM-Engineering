@@ -1,7 +1,7 @@
-from .logHelper import AppLogger
-from pathlib import Path
-import time
 from datetime import datetime
+from pathlib import Path
+
+from .logHelper import AppLogger
 
 base_dir = Path(__file__).resolve().parent.parent.parent
 print(base_dir)
@@ -35,14 +35,26 @@ def mark_start_of_execution():
         )
 
 
-def write_api_output(prompt, response):
-    print(prompt, response)
+def write_api_output(prompt, resObject, time_elapsed):
     with open(output_file_path, "a") as file:
-        file.write("*" * 40 + "\n")
-        file.write(f"Calling mock_llm_call() with prompt: {prompt}\n")
-        file.write("*" * 40 + "\n")
-        file.write(f"Response: {response}\n")
-        file.write("*" * 40 + "\n\n")
+        file.write("\nAggregation Results")
+        file.write("=" * 60)
+
+        for result in resObject:
+            file.write(f"\nProvider : {result.provider}\n")
+
+            if result.success:
+                file.write("Status   : SUCCESS\n")
+                file.write(f"Latency  : {result.latency_seconds:.2f} seconds\n")
+                file.write(f"Response : {result.text}\n")
+
+            else:
+                file.write("Status   : FAILED\n")
+                file.write(f"Error    : {result.error}\n")
+
+        file.write("\n" + "=" * 60)
+        file.write("Aggregation completed.\n")
+        file.write(f"Total time taken: {time_elapsed:.2f} seconds\n")
 
 
 def write_latency_summary(data: dict):

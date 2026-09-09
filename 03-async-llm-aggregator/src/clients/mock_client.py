@@ -3,34 +3,50 @@ import secrets
 import string
 import time
 
-from src import models
+from src.models import ProviderResponse
+from src.utils.exceptions import TransientProviderError
 
 
 class MockClient:
-    def __init__(self, name: str, delay: float = 1.0, should_fail: bool = False):
+    def __init__(
+        self,
+        name: str,
+        delay: float = 1.0,
+        should_fail: bool = False,
+        failures_before_success: int = 0,
+    ):
         self.name = name
         self.delay = delay
         self.should_fail = should_fail
+        self.failures_before_success = failures_before_success
+        self.attempt_count = 0
 
-    async def generate(self, prompt: str) -> models.ProviderResponse:
-        t0 = time.perf_counter()
+    async def generate(self, prompt: str) -> ProviderResponse:
+        self.attempt_count += 1
+
+        start = time.perf_counter()
+
         await asyncio.sleep(self.delay)
 
         if self.should_fail:
-            raise RuntimeError(f"{self.name} simulated failure")
+            raise RuntimeError(f"{self.name} simulated permanent failure")
 
-        res = self.__generate_string()
-        t1 = time.perf_counter()
-        return models.ProviderResponse(
+        if self.attempt_count <= self.failures_before_success:
+            raise TransientProviderError(f"{self.name} temporary failure")
+
+        text = self._generate_string()
+
+        latency = time.perf_counter() - start
+
+        return ProviderResponse(
             provider=self.name,
-            text=res,
-            latency_seconds=round(t1 - t0, 3),
+            text=text,
+            latency_seconds=round(latency, 3),
             success=True,
             error=None,
         )
 
-    def __generate_string(self):
-        """Generates a cryptographically secure random alphanumeric string."""
+    def _generate_string(self) -> str:
+        alphabet = string.ascii_letters + string.digits
 
-        alphabet = string.ascii_letters + string.digits  # A-Z, a-z, 0-9
         return "".join(secrets.choice(alphabet) for _ in range(25))

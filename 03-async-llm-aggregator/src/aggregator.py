@@ -1,54 +1,66 @@
 import asyncio
 
-from .models import ProviderResponse
+from src.models import ProviderResponse
+from src.utils.retry import retry_async
 
 
 class AsyncAggregator:
-    def __init__(self, clients, timeout=20):
+    def __init__(
+        self,
+        clients,
+        timeout=3,
+        max_attempts=3,
+        base_delay=1.0,
+        jitter=0.0,
+    ):
         self.clients = clients
         self.timeout = timeout
-        self.results = []
+
+        self.max_attempts = max_attempts
+        self.base_delay = base_delay
+        self.jitter = jitter
 
     async def aggregate(self, prompt):
-        # """Version 1: Using asyncio.create_task() to create tasks and then gather results"""
-        # # 1. Schedule each client's generate() as a running background task on the event loop
-        # # tasks = [asyncio.create_task(client.generate(query)) for client in self.clients]
-        # # results = await asyncio.gather(*tasks)
 
-        # """Version 2: Using asyncio.gather() directly without creating tasks"""
-
-        # tasks = asyncio.wait_for(
-        #     (client.generate(prompt) for client in self.clients), timeout=self.timeout
-        # )
-        # tasks = []
-        # for client in self.clients:
-        #     tasks.append(
-        #         asyncio.wait_for(client.generate(prompt), timeout=self.timeout)
-        #     )
         tasks = [
             asyncio.wait_for(
-                client.generate(prompt),
+                retry_async(
+                    client.generate,
+                    prompt,
+                    max_attempts=self.max_attempts,
+                    base_delay=self.base_delay,
+                    jitter=self.jitter,
+                    operation_name=client.name,
+                ),
                 timeout=self.timeout,
             )
             for client in self.clients
         ]
-        response_list = await asyncio.gather(*tasks, return_exceptions=True)
 
-        # """ Version 3: With error handling """
-        # # coroutines = [client.generate(query) for client in self.clients]
-        for client, result in zip(self.clients, response_list):
+        response_list = await asyncio.gather(
+            *tasks,
+            return_exceptions=True,
+        )
+
+        final_results = []
+
+        for client, result in zip(
+            self.clients,
+            response_list,
+        ):
             if isinstance(result, TimeoutError):
-                self.results.append(
+                final_results.append(
                     ProviderResponse(
                         provider=client.name,
                         text=None,
                         latency_seconds=None,
                         success=False,
-                        error=f"{client.name} timed out after {self.timeout} seconds",
+                        error=(f"{client.name} timed out after {self.timeout} seconds"),
                     )
                 )
+
             elif isinstance(result, Exception):
-                self.results.append(
+                final_results.append(
                     ProviderResponse(
                         provider=client.name,
                         text=None,
@@ -57,7 +69,8 @@ class AsyncAggregator:
                         error=str(result),
                     )
                 )
+
             else:
-                self.results.append(result)
-        # # results = await asyncio.gather(*coroutines)
-        return self.results
+                final_results.append(result)
+
+        return final_results
