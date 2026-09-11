@@ -1,12 +1,13 @@
 import asyncio
 import random
+import time
 from pathlib import Path
 
 from src.observability.logHelper import AppLogger
+from src.observability.metrics import shared_tracker
 from src.utils.exceptions import TransientProviderError
 
 base_dir = Path(__file__).resolve().parent.parent.parent
-print(base_dir)
 log_file_path = base_dir / "logs" / "app.log"
 # output_file_path = base_dir / "output" / "output.txt"
 
@@ -57,24 +58,10 @@ async def retry_async(
     )
 
     for attempt in range(1, max_attempts + 1):
+        start = time.perf_counter()
+
         try:
-            logger.info(
-                "Attempting %s - attempt %s/%s",
-                name,
-                attempt,
-                max_attempts,
-            )
-
             result = await operation(*args)
-
-            logger.info(
-                "%s succeeded on attempt %s/%s",
-                name,
-                attempt,
-                max_attempts,
-            )
-
-            return result
 
         except TransientProviderError as exc:
             if attempt == max_attempts:
@@ -83,6 +70,14 @@ async def retry_async(
                     name,
                     max_attempts,
                     exc,
+                    extra={
+                        "event": "provider_retry_exhausted",
+                        "provider": name,
+                        "attempt": attempt,
+                        "max_attempts": max_attempts,
+                        "status": "failed",
+                        "error": str(exc),
+                    },
                 )
                 raise
 
@@ -98,6 +93,36 @@ async def retry_async(
                 max_attempts,
                 exc,
                 delay,
+                extra={
+                    "event": "provider_retry",
+                    "provider": name,
+                    "attempt": attempt,
+                    "max_attempts": max_attempts,
+                    "status": "retrying",
+                    "error": str(exc),
+                    "retry_delay_seconds": round(delay, 3),
+                },
             )
 
-            await asyncio.sleep(delay)
+        else:
+            logger.info(
+                "%s succeeded on attempt %s/%s",
+                name,
+                attempt,
+                max_attempts,
+                extra={
+                    "event": "provider_attempt",
+                    "provider": name,
+                    "attempt": attempt,
+                    "max_attempts": max_attempts,
+                    "status": "success",
+                },
+            )
+
+            return result
+
+        finally:
+            latency = time.perf_counter() - start
+            shared_tracker.record(latency)
+
+        await asyncio.sleep(delay)

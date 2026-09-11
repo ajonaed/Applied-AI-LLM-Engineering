@@ -2,7 +2,7 @@ import time
 
 import httpx
 
-from src.config import OLLAMA_BASE_URL, OLLAMA_MODEL
+from src.config import OLLAMA_BASE_URL, OLLAMA_MODEL, REQUEST_TIMEOUT_SECONDS
 from src.models import ProviderResponse
 from src.utils.exceptions import (
     ClientTimeoutError,
@@ -18,7 +18,7 @@ class OllamaClient:
         self,
         base_url=OLLAMA_BASE_URL,
         model=OLLAMA_MODEL,
-        timeout=15.0,
+        timeout=REQUEST_TIMEOUT_SECONDS,
     ):
         self.name = "Ollama client"
         self.base_url = base_url

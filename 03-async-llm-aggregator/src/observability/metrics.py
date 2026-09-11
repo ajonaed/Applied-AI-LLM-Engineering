@@ -37,6 +37,10 @@ class LatencyTracker:
             return 0
         return statistics.quantiles(latencies, n=100)[94]
 
+    def reset(self):
+        with self.lock:
+            self.latencies.clear()
+
     def summary(self):
         latencies = self._snapshot()
         if not latencies:
@@ -59,6 +63,7 @@ class LatencyTracker:
             "max_latency": round(max(latencies), 3),
             "min_latency": round(min(latencies), 3),
         }
+
 
 # CRITICAL: Create the single instance here
 shared_tracker = LatencyTracker()

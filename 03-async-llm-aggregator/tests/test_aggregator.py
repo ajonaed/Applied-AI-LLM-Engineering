@@ -2,7 +2,6 @@ import asyncio
 import time
 
 import pytest
-
 from src.aggregator import AsyncAggregator
 from src.clients.mock_client import MockClient
 
@@ -125,3 +124,51 @@ async def test_asyncio_timeout_raises_timeout_error():
     with pytest.raises(TimeoutError):
         async with asyncio.timeout(0.05):
             await slow_operation()
+
+
+@pytest.mark.asyncio
+async def test_aggregator_does_not_accumulate_results_between_calls():
+    client = MockClient(
+        name="Client",
+        delay=0.01,
+    )
+
+    aggregator = AsyncAggregator(
+        clients=[client],
+        timeout=1,
+    )
+
+    first_results = await aggregator.aggregate("first prompt")
+    second_results = await aggregator.aggregate("second prompt")
+
+    assert len(first_results) == 1
+    assert len(second_results) == 1
+
+    assert first_results is not second_results
+
+
+@pytest.mark.asyncio
+async def test_clients_run_concurrently():
+    clients = [
+        MockClient(name="Client 1", delay=0.25),
+        MockClient(name="Client 2", delay=0.25),
+        MockClient(name="Client 3", delay=0.25),
+    ]
+
+    aggregator = AsyncAggregator(
+        clients=clients,
+        timeout=1,
+        max_attempts=1,
+    )
+
+    start = time.perf_counter()
+
+    results = await aggregator.aggregate("test prompt")
+
+    elapsed = time.perf_counter() - start
+
+    assert all(result.success for result in results)
+
+    # Sequential execution would take about 0.75 seconds.
+    # Concurrent execution should be much closer to 0.25 seconds.
+    assert elapsed < 0.6

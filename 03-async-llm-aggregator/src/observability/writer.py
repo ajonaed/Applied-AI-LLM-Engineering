@@ -4,7 +4,6 @@ from pathlib import Path
 from .logHelper import AppLogger
 
 base_dir = Path(__file__).resolve().parent.parent.parent
-print(base_dir)
 log_file_path = base_dir / "logs" / "app.log"
 output_file_path = base_dir / "output" / "output.txt"
 
@@ -13,16 +12,15 @@ output_file_path.parent.mkdir(parents=True, exist_ok=True)
 
 
 def mark_start_of_execution():
-    with open(log_file_path, "a") as file:
-        file.write(
-            "\n\n"
-            + "*" * 10
-            + " New Execution : "
-            + str(datetime.now())
-            + " "
-            + "*" * 10
-            + "\n\n"
-        )
+    logger = AppLogger.get_logger(str(log_file_path))
+
+    logger.info(
+        "New execution started",
+        extra={
+            "event": "execution_start",
+        },
+    )
+
     with open(output_file_path, "a") as file:
         file.write(
             "\n\n"
@@ -37,7 +35,7 @@ def mark_start_of_execution():
 
 def write_api_output(prompt, resObject, time_elapsed):
     with open(output_file_path, "a") as file:
-        file.write("\nAggregation Results")
+        file.write("\nAggregation Results\n")
         file.write("=" * 60)
 
         for result in resObject:
@@ -63,13 +61,13 @@ def write_latency_summary(data: dict):
     logger.info(
         "latency_summary",
         extra={
-            "extra_data": {
-                "event": "latency_summary",
-                "total_calls": data["total_calls"],
-                "avg_latency": data["avg_latency"],
-                "max_latency": data["max_latency"],
-                "min_latency": data["min_latency"],
-            }
+            "event": "latency_summary",
+            "metric_scope": "provider_attempt",
+            "total_calls": data["total_calls"],
+            "avg_latency": data["avg_latency"],
+            "p95_latency": data["p95_latency"],
+            "max_latency": data["max_latency"],
+            "min_latency": data["min_latency"],
         },
     )
 

@@ -4,6 +4,7 @@ import time
 from src.aggregator import AsyncAggregator
 from src.clients.mock_client import MockClient
 from src.clients.ollama_client import OllamaClient
+from src.observability.metrics import shared_tracker
 from src.observability.writer import (
     mark_start_of_execution,
     write_api_output,
@@ -16,6 +17,8 @@ async def main():
     #     level=logging.INFO,
     #     format="%(asctime)s | %(levelname)s | %(message)s",
     # )
+    shared_tracker.reset()
+
     mark_start_of_execution()
     retry_client = MockClient(
         name="Retry Client",
@@ -58,21 +61,9 @@ async def main():
 
     elapsed = time.perf_counter() - start
     write_api_output("Should I continue learning Applied AI?", results, elapsed)
-    write_latency_summary(
-        {
-            "total_calls": len(results),
-            "avg_latency": sum(r.latency_seconds for r in results if r.success)
-            / len([r for r in results if r.success])
-            if any(r.success for r in results)
-            else 0,
-            "max_latency": max(r.latency_seconds for r in results if r.success)
-            if any(r.success for r in results)
-            else 0,
-            "min_latency": min(r.latency_seconds for r in results if r.success)
-            if any(r.success for r in results)
-            else 0,
-        }
-    )
+    latency_summary = shared_tracker.summary()
+
+    write_latency_summary(latency_summary)
 
     print("\nAggregation complete.\n")
 
